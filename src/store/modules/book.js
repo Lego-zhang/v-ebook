@@ -1,18 +1,21 @@
 const book = {
   state: {
-    test: 1,
+    fileName: '',
+    menuVisible: false,
   },
   mutations: {
-    SET_TEST: (state, newTest) => {
+    SET_FILENAME: (state, fileName) => {
       // eslint-disable-next-line no-param-reassign
-      state.test = newTest;
+      state.fileName = fileName;
+    },
+    SET_MENUVISIBLE: (state, menuVisible) => {
+      // eslint-disable-next-line no-param-reassign
+      state.menuVisible = menuVisible;
     },
   },
   actions: {
-    setTest: ({ commit, state }, newTest) => {
-      console.log(state);
-      return commit('SET_TEST', newTest);
-    },
+    setFileName: ({ commit }, fileName) => commit('SET_FILENAME', fileName),
+    setMenuVisible: ({ commit }, menuVisible) => commit('SET_MENUVISIBLE', menuVisible),
   },
 };
 export default book;
