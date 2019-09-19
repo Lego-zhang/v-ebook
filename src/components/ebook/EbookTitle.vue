@@ -21,9 +21,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import ebookMixin from '../../utils/mixin';
 
 export default {
+  mixins: [ebookMixin],
   data() {
     return {};
   },
@@ -31,9 +32,6 @@ export default {
     back() {
       console.log('back');
     },
-  },
-  computed: {
-    ...mapGetters(['menuVisible']),
   },
 };
 </script>

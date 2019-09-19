@@ -6,10 +6,12 @@
 
 <script>
 import Epub from 'epubjs';
-import { mapGetters } from 'vuex';
+import ebookMixin from '../../utils/mixin';
+
 
 global.ePub = Epub;
 export default {
+  mixins: [ebookMixin],
   methods: {
     prevPage() {
       if (this.rendition) {
@@ -65,9 +67,6 @@ export default {
         event.stopPropagation();
       });
     },
-  },
-  computed: {
-    ...mapGetters(['fileName', 'menuVisible']),
   },
   mounted() {
     const fileName = this.$route.params.fileName.split('|').join('/');
