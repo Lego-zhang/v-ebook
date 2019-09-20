@@ -26,10 +26,12 @@ export default {
       }
     },
     toggleTitleAndMenu() {
-      this.$store.dispatch('setMenuVisible', !this.menuVisible);
+      // this.$store.dispatch('setMenuVisible', !this.menuVisible);
+      this.setMenuVisible(!this.menuVisible);
     },
     hedeTitleAndMenu() {
-      this.$store.dispatch('setMenuVisible', false);
+      // this.$store.dispatch('setMenuVisible', false);
+      this.setMenuVisible(false);
     },
     initEpub() {
       const baseUrl = `http://192.168.1.109:9091/epub/${this.fileName}.epub`;
@@ -72,7 +74,10 @@ export default {
     const fileName = this.$route.params.fileName.split('|').join('/');
     // fileName在很多地方要使用所以要使用Vuex
 
-    this.$store.dispatch('setFileName', fileName).then(() => {
+    // this.$store.dispatch('setFileName', fileName).then(() => {
+    //   this.initEpub();
+    // });
+    this.setFileName(fileName).then(() => {
       this.initEpub();
     });
   },
