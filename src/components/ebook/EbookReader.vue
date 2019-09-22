@@ -27,15 +27,22 @@ export default {
     },
     toggleTitleAndMenu() {
       // this.$store.dispatch('setMenuVisible', !this.menuVisible);
+
+      if (this.menuVisible) {
+        this.setSettingVisible(-1);
+      }
       this.setMenuVisible(!this.menuVisible);
     },
     hedeTitleAndMenu() {
       // this.$store.dispatch('setMenuVisible', false);
       this.setMenuVisible(false);
+      this.setSettingVisible(-1);
     },
     initEpub() {
-      const baseUrl = `http://192.168.1.109:9091/epub/${this.fileName}.epub`;
+      console.log(this.fileName);
+      const baseUrl = `http://192.168.1.8:9091/epub/${this.fileName}.epub`;
       this.book = new Epub(baseUrl);
+      this.setCurrentBook(this.book);
       this.rendition = this.book.renderTo('read', {
         // eslint-disable-next-line no-restricted-globals
         width: innerWidth,
@@ -77,6 +84,7 @@ export default {
     // this.$store.dispatch('setFileName', fileName).then(() => {
     //   this.initEpub();
     // });
+    console.log(fileName);
     this.setFileName(fileName).then(() => {
       this.initEpub();
     });
