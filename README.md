@@ -57,3 +57,21 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - 通过对象解构可以通过 this 拿到所需要的值
 
 - menuVisible(控制按钮栏的显示与隐藏)
+
+### 环境变量与模式
+
+##### 创建环境变量
+
+1. 在更目录下创建.env.xxxx 文件
+2. xxx 表示模式
+   - development(开发模式)
+   - production(生产模式)
+   - test(测试模式)
+3. 文件中输入
+
+```js
+VUE_APP_RES_URL= XXXX
+// VUE_APP_未必填参数
+```
+
+#####

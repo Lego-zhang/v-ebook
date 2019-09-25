@@ -26,17 +26,20 @@
       </div>
     </transition>
     <ebook-setting-font></ebook-setting-font>
+    <ebook-setting-font-popup></ebook-setting-font-popup>
   </div>
 </template>
 
 <script>
 import ebookMixin from '../../utils/mixin';
 import EbookSettingFont from './EbookSettingFont.vue';
+import EbookSettingFontPopup from './EbookSettingFontPopup.vue';
 
 export default {
   mixins: [ebookMixin],
   components: {
     EbookSettingFont,
+    EbookSettingFontPopup,
   },
   data() {
     // 这里存放数据
