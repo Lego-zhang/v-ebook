@@ -59,8 +59,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - menuVisible(控制按钮栏的显示与隐藏)
 
 ### 环境变量与模式
+> 在不同模式下调用不同的变量的(例如路径)时候
 
 ##### 创建环境变量
+
 
 1. 在更目录下创建.env.xxxx 文件
 2. xxx 表示模式
@@ -74,4 +76,15 @@ VUE_APP_RES_URL= XXXX
 // VUE_APP_未必填参数
 ```
 
-#####
+##### 调用环境变量
+- 在使用的地方,通过使用process.env.进行调用环境变量
+
+```js
+process.env.VUE_APP_RES_URL
+```
+
+### storage
+ cnpm i --save web-storage-cache
+
+ 可以将对象转为Json 读取时将Json转为对象
+ ### 国际化语言

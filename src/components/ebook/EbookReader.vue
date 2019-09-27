@@ -7,7 +7,12 @@
 <script>
 import Epub from 'epubjs';
 import ebookMixin from '../../utils/mixin';
-
+import {
+  saveFontFamily,
+  getFontFamily,
+  saveFontSize,
+  getFontSize,
+} from '../../utils/loaclStorage';
 
 global.ePub = Epub;
 export default {
@@ -40,6 +45,24 @@ export default {
       this.setSettingVisible(-1);
       this.setFontFamilyVisible(false);
     },
+    initFontSize() {
+      const fontSize = getFontSize(this.fileName);
+      if (!fontSize) {
+        saveFontSize(this.fileName, this.defaultFontSize);
+      } else {
+        this.rendition.themes.fontSize(fontSize);
+        this.setDefaultFontSize(fontSize);
+      }
+    },
+    initFontFamily() {
+      const font = getFontFamily(this.fileName);
+      if (!font) {
+        saveFontFamily(this.fileName, this.defaultFontFamily);
+      } else {
+        this.rendition.themes.font(font);
+        this.setDefaultFontFamily(font);
+      }
+    },
     initEpub() {
       const baseUrl = `${process.env.VUE_APP_RES_URL}/epub/${this.fileName}.epub`;
       this.book = new Epub(baseUrl);
@@ -51,7 +74,10 @@ export default {
         height: innerHeight,
         method: 'default',
       });
-      this.rendition.display();
+      this.rendition.display().then(() => {
+        this.initFontFamily();
+        this.initFontSize();
+      });
       // 绑定事件
       this.rendition.on('touchstart', (event) => {
         // 获取手指触碰的X轴的位置
@@ -92,7 +118,6 @@ export default {
     // this.$store.dispatch('setFileName', fileName).then(() => {
     //   this.initEpub();
     // });
-    console.log(fileName);
     this.setFileName(fileName).then(() => {
       this.initEpub();
     });

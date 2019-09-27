@@ -43,6 +43,7 @@
 <script>
 import ebookMixin from '../../utils/mixin';
 import { FONT_FAMILY } from '../../utils/book';
+import { saveFontFamily } from '../../utils/loaclStorage';
 
 export default {
   mixins: [ebookMixin],
@@ -57,6 +58,7 @@ export default {
     },
     setFontFamily(font) {
       this.setDefaultFontFamily(font);
+      saveFontFamily(this.fileName, font);
       if (font === 'Default') {
         this.currentBook.rendition.themes.font('Times New Roman');
       } else {
@@ -67,6 +69,9 @@ export default {
       return this.defaultFontFamily === item.font;
     },
 
+
+  },
+  mounted() {
   },
 };
 </script>
