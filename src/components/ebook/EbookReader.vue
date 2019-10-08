@@ -12,7 +12,11 @@ import {
   getFontFamily,
   saveFontSize,
   getFontSize,
+  getTheme,
+  saveTheme,
 } from '../../utils/loaclStorage';
+
+import { addCss } from '../../utils/book';
 
 global.ePub = Epub;
 export default {
@@ -63,6 +67,21 @@ export default {
         this.setDefaultFontFamily(font);
       }
     },
+    initTheme() {
+      let defaultTheme = getTheme(this.flieName);
+      if (!defaultTheme) {
+        defaultTheme = this.themeList[0].name;
+        this.setDefaultTheme(defaultTheme);
+        saveTheme(this.fileName, defaultTheme);
+      }
+      this.themeList.forEach((theme) => {
+        this.rendition.themes.register(theme.name, theme.style);
+      });
+      this.rendition.themes.select(defaultTheme);
+    },
+    initGlobalStyle() {
+      addCss(`${process.env.VUE_APP_RES_URL}theme/theme_default.css`);
+    },
     initEpub() {
       const baseUrl = `${process.env.VUE_APP_RES_URL}/epub/${this.fileName}.epub`;
       this.book = new Epub(baseUrl);
@@ -75,8 +94,10 @@ export default {
         method: 'default',
       });
       this.rendition.display().then(() => {
+        this.initTheme();
         this.initFontFamily();
         this.initFontSize();
+        this.initGlobalStyle();
       });
       // 绑定事件
       this.rendition.on('touchstart', (event) => {
