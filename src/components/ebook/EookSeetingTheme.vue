@@ -39,10 +39,11 @@ export default {
   methods: {
     setTheme(index) {
       const theme = this.themeList[index];
-      saveTheme(this.fileName, theme.name);
       this.setDefaultTheme(theme.name).then(() => {
         this.currentBook.rendition.themes.select(this.defaultTheme);
+        this.initGlobalStyle();
       });
+      saveTheme(this.fileName, theme.name);
     },
   },
 };

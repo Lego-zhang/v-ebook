@@ -68,9 +68,29 @@ function addCss(href) {
   document.getElementsByTagName('head')[0].appendChild(link);
 }
 
+function removeCss(href) {
+  const links = document.getElementsByTagName('link');
+  // eslint-disable-next-line no-plusplus
+  for (let i = links.length; i >= 0; i--) {
+    const link = links[i];
+    if (link && link.getAttribute('href') && link.getAttribute('href') === href) {
+      link.parentNode.removeChild(link);
+    }
+  }
+}
+
+function removeCssAll() {
+  removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_default.css`);
+  removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_eye.css`);
+  removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_gold.css`);
+  removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_night.css`);
+}
+
 export {
   FONT_SIZE_LIST,
   FONT_FAMILY,
   themeList,
   addCss,
+  removeCss,
+  removeCssAll,
 };
